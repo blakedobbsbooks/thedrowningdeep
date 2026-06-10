@@ -1,0 +1,444 @@
+/*
+Theme Name: Abyss Serial
+Theme URI: https://example.com/abyss-serial
+Author: Developer
+Description: A clean, dark-themed layout with a sticky header.
+Version: 1.0.0
+Text Domain: abyss-serial
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Metamorphous&family=IM+Fell+English:ital@0;1&display=swap');
+
+:root {
+  --deep:       #000000;
+  --abyss:      #030b1a;
+  --ocean:      #061e3c;
+  --mid:        #0a3060;
+  --surface:    #0d4080;
+  --foam:       #c8dff5;
+  --mist:       #a0c4e8;
+  --pale:       #e8f2fb;
+  --text:       #d0e8f8;
+  --text-dim:   #7aa8cc;
+  --border:     rgba(100, 160, 220, 0.18);
+  --border-glow:rgba(100, 160, 220, 0.35);
+  --font-display: 'Metamorphous', Georgia, serif;
+  --font-body:    Georgia, 'Times New Roman', serif;
+  --radius:     4px;
+  --transition: 0.25s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--abyss);
+  background-image: linear-gradient(180deg, var(--ocean) 0%, var(--abyss) 50%, var(--deep) 100%);
+  background-size: cover;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--pale);
+  text-decoration: underline;
+}
+
+p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: normal;
+  letter-spacing: 0.04em;
+  color: var(--foam);
+  margin-bottom: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+li {
+  line-height: 1.8;
+  margin-bottom: 0.4rem;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+#content-area {
+  padding-top: 4rem; 
+  padding-bottom: 4rem;
+}
+
+.container--wide {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+#site-header {
+  background: linear-gradient(180deg, rgba(3,11,26,1) 0%, rgba(6,30,60,0.98) 100%);
+  border-bottom: 1px solid var(--border-glow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+#header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  gap: 1rem;
+}
+
+#site-title h1 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 0;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+}
+
+#site-title a {
+  text-decoration: none;
+}
+
+#site-title a:hover {
+  color: var(--pale);
+}
+
+#main-nav {
+  display: flex;
+  align-items: center;
+}
+
+#main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+#main-nav li {
+  position: relative;
+}
+
+#main-nav li a {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mist);
+  transition: color var(--transition);
+  white-space: nowrap;
+  text-decoration: none;
+  display: block;
+}
+
+#main-nav li a:hover {
+  color: var(--pale);
+}
+
+#main-nav li ul.sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(3, 11, 26, 0.98);
+  border: 1px solid var(--border-glow);
+  padding: 0.5rem 1rem;
+  margin: 0;
+  list-style: none;
+  min-width: 180px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+#main-nav li ul.sub-menu li {
+  width: 100%;
+  margin: 0;
+}
+
+#main-nav li ul.sub-menu li a {
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#main-nav li:hover > ul.sub-menu {
+  display: block;
+}
+
+.nav-toggle-label {
+  display: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1010;
+  background: none;
+  border: none;
+  line-height: 0;
+}
+
+.nav-toggle-label span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--mist);
+  margin: 4px 0;
+  transition: all 0.25s ease;
+}
+
+.wp-post-entry {
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.wp-post-entry:last-child {
+  border-bottom: none;
+}
+
+.post-meta {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.has-drop-cap:not(:focus)::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  line-height: 0.8;
+  margin: 0.1em 0.12em 0 0;
+  color: var(--text);
+  text-shadow: 0 0 20px rgba(208, 232, 248, 0.2);
+}
+
+/* --- Footer Area Styles --- */
+#site-footer {
+  background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(3,11,26,0.85) 100%);
+  border-top: 1px solid var(--border);
+  padding: 3rem 1.5rem;
+  margin-top: auto;
+}
+
+#footer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+#footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+#footer-social a {
+  display: inline-flex;
+  transition: transform 0.2s ease, filter var(--transition);
+}
+
+#footer-social a:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+#footer-links {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#footer-links a {
+  color: var(--mist);
+}
+
+#footer-links a:hover {
+  color: var(--pale);
+}
+
+#footer-links .sep {
+  color: var(--border-glow);
+  font-weight: bold;
+}
+
+#copyright {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  opacity: 0.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  #content-area {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .has-drop-cap:not(:focus)::first-letter {
+    font-size: 3.5rem;
+    margin: 0.05em 0.1em 0 0;
+  }
+
+  .nav-toggle-label {
+    display: block;
+  }
+
+  /* FIXED: Use display:none/flex instead of visibility/opacity so the
+     menu is truly hidden until toggled, and display:flex!important
+     no longer fights the hidden state. */
+  #main-nav ul,
+  #main-nav .menu {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #030b1a;
+    flex-direction: column;
+    gap: 0;
+    padding: 2rem;
+    display: none !important;
+    z-index: 9999;
+    border-top: 1px solid var(--border);
+    overflow-y: auto;
+  }
+
+  #main-nav li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    display: block !important;
+  }
+
+  #main-nav li a {
+    padding: 1.25rem 0;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--text) !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* FIXED: Hidden by default on mobile; only shown when parent li
+     has .is-active class (toggled via JS tap). */
+  #main-nav li ul.sub-menu {
+    display: none !important;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(6, 30, 60, 0.4);
+    border: none;
+    padding: 0 0 1rem 0;
+    box-shadow: none;
+  }
+
+  #main-nav li ul.sub-menu li {
+    border-bottom: none;
+  }
+
+  #main-nav li ul.sub-menu li a {
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+    color: var(--text-dim) !important;
+  }
+
+  /* Show sub-menu when parent li has .is-active */
+  #main-nav li.is-active > ul.sub-menu {
+    display: block !important;
+  }
+
+  /* FIXED: Show the nav when .nav-open is set */
+  #main-nav.nav-open ul,
+  #main-nav.nav-open .menu {
+    display: flex !important;
+  }
+
+  #main-nav.nav-open .nav-toggle-label span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  #main-nav.nav-open .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #main-nav.nav-open .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+}
