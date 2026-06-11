@@ -117,22 +117,45 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
 </header>
 
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
     var btn = document.getElementById('nav-toggle');
     var nav = document.getElementById('main-nav');
     if (!btn || !nav) return;
-    btn.addEventListener('click', function() {
+
+    // Toggle main mobile menu
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
         var isOpen = nav.classList.toggle('nav-open');
         btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
-    // Close menu when a link is clicked
+
+    // Handle mobile sub-menus and auto-closing links
     nav.addEventListener('click', function(e) {
-        if (e.target.tagName === 'A') {
+        var targetLink = e.target.closest('a');
+        if (!targetLink) return;
+
+        var parentLi = targetLink.parentElement;
+        var hasSubMenu = parentLi.querySelector('.sub-menu');
+
+        // Check if we are on a mobile screen size
+        if (window.innerWidth <= 768) {
+            // If the item has a sub-menu, handle the accordion expand toggle
+            if (hasSubMenu) {
+                if (!parentLi.classList.contains('is-active')) {
+                    e.preventDefault();
+                    parentLi.classList.add('is-active');
+                    return;
+                }
+            }
+        }
+
+        // Close menu completely when a final target link is clicked
+        if (!hasSubMenu || window.innerWidth > 768) {
             nav.classList.remove('nav-open');
             btn.setAttribute('aria-expanded', 'false');
         }
     });
-})();
+});
 </script>
 
 <main id="content-area" class="container">
@@ -195,10 +218,10 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
 <footer id="site-footer">
     <div id="footer-inner">
         <div id="footer-social">
-            <a href="https://bsky.app/profile/blakedobbs.substack.com" target="_blank" title="Bluesky"><img src="https://thedrowningdeep.pages.dev/images/bsky-logo.png" alt="Bluesky" width="20" height="20"></a>
-            <a href="https://archiveofourown.org/users/blakedobbs" target="_blank" title="Archive of Our Own"><img src="https://thedrowningdeep.pages.dev/images/ao3-logo.png" alt="AO3" width="20" height="20"></a>
-            <a href="https://squidgeworld.org/users/blakedobbs" target="_blank" title="SquidgeWorld Archive"><img src="https://thedrowningdeep.pages.dev/images/squidgeworld-logo.png" alt="SquidgeWorld" width="20" height="20"></a>
-            <a href="https://www.tumblr.com/blakedobbs?source=share" target="_blank" title="Tumblr"><img src="https://thedrowningdeep.pages.dev/images/tumblr-logo.png" alt="Tumblr" width="20" height="20"></a>
+            <a href="https://bsky.app/profile/blakedobbs.substack.com" target="_blank" title="Bluesky"><img src="/wp-content/uploads/2026/06/bsky-logo.png" alt="Bluesky" width="20" height="20"></a>
+            <a href="https://archiveofourown.org/users/blakedobbs" target="_blank" title="Archive of Our Own"><img src="/wp-content/uploads/2026/06/Linktree-Image.png" alt="AO3" width="20" height="20"></a>
+            <a href="https://squidgeworld.org/users/blakedobbs" target="_blank" title="SquidgeWorld Archive"><img src="/wp-content/uploads/2026/06/squidgeworld-archive_201370.png" alt="SquidgeWorld" width="20" height="20"></a>
+            <a href="https://www.tumblr.com/blakedobbs?source=share" target="_blank" title="Tumblr"><img src="/wp-content/uploads/2026/06/tumblr-logo.png" alt="Tumblr" width="20" height="20"></a>
         </div>
 
         <div id="footer-links">
@@ -216,7 +239,6 @@ h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-backg
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/abyss-serial-theme/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
-<script id="abyss-nav-mobile-js" src="/wp-content/themes/abyss-serial-theme/js/nav-mobile.js?ver=1.0.0"></script>
 <script id="wp-emoji-settings" type="application/json">
 {"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?ver=7.0"}}
 </script>

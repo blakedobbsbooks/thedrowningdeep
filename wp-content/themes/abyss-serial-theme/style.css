@@ -358,9 +358,6 @@ li {
     display: block;
   }
 
-  /* FIXED: Use display:none/flex instead of visibility/opacity so the
-     menu is truly hidden until toggled, and display:flex!important
-     no longer fights the hidden state. */
   #main-nav ul,
   #main-nav .menu {
     position: fixed;
@@ -395,8 +392,6 @@ li {
     opacity: 1 !important;
   }
 
-  /* FIXED: Hidden by default on mobile; only shown when parent li
-     has .is-active class (toggled via JS tap). */
   #main-nav li ul.sub-menu {
     display: none !important;
     position: relative;
@@ -419,17 +414,16 @@ li {
     color: var(--text-dim) !important;
   }
 
-  /* Show sub-menu when parent li has .is-active */
   #main-nav li.is-active > ul.sub-menu {
     display: block !important;
   }
 
-  /* FIXED: Show the nav when .nav-open is set */
   #main-nav.nav-open ul,
   #main-nav.nav-open .menu {
     display: flex !important;
   }
 
+  /* FIXED: Adjusted to correctly find toggle targets nested inside #main-nav.nav-open */
   #main-nav.nav-open .nav-toggle-label span:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
@@ -440,5 +434,20 @@ li {
 
   #main-nav.nav-open .nav-toggle-label span:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* FIXED: Prevents content elements from forcing horizontal layout overflow on mobile screens */
+  .entry-content, 
+  .entry-content p {
+    text-align: left !important;
+    hyphens: manual !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+  }
+
+  /* FIXED: Ensures custom block styles, subscription forms, and buttons scale within constraints */
+  .entry-content * {
+    max-width: 100% !important;
   }
 }
